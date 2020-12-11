@@ -1,0 +1,11 @@
+#footer {
+    position:absolute;
+    bottom:0;
+    height:30px;
+    text-align:center;
+    font-style: italic;
+}
+#left{
+    padding-left:auto;
+    margin-left:auto;
+}

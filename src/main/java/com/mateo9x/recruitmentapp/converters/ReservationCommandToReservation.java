@@ -1,0 +1,29 @@
+package com.mateo9x.recruitmentapp.converters;
+
+import com.mateo9x.recruitmentapp.commands.BookCommand;
+import com.mateo9x.recruitmentapp.commands.ReservationCommand;
+import com.mateo9x.recruitmentapp.model.Book;
+import com.mateo9x.recruitmentapp.model.Reservation;
+import lombok.Synchronized;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ReservationCommandToReservation implements Converter<ReservationCommand, Reservation> {
+
+        @Synchronized
+        @Nullable
+        @Override
+        public Reservation convert (ReservationCommand source){
+            if (source == null) {
+                return null;
+            }
+            final Reservation reservation = new Reservation();
+            reservation.setReservationId(source.getReservationId());
+            reservation.setUserId(source.getUserId());
+          //  reservation.setBookId(source.getBookId());
+            return reservation;
+        }
+
+    }

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-brand"  style="font-style:italic">Books Application</div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" style="margin:auto;">
+                <a class="nav-link" href="#" >Home Page <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3" style="text-align: center;font-style:italic;">Hello!</h1>
+        </div>
+    </div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-5" id="left">
+            <h2>Books</h2>
+            <p>Options for books:</p>
+            <ul>
+                <li><a href="#" th:href="@{'/book/new'}" style="margin-right: 5px;">Add new</a>book</li>
+                <li><a href="#" th:href="@{'/book/list'}" style="margin-right: 5px;">List</a>all books</li>
+
+            </ul>
+        </div>
+
+        <div class="col-md-5">
+            <h2>Reservations</h2>
+            <p>Options for reservations:</p>
+            <ul>
+                <li><a href="#" th:href="@{'/book/list'}" style="margin-right: 5px;">Reserve</a>book from a list</li>
+                <li><a href="#" th:href="@{'/reservation/show'}" style="margin-right: 5px;">Show</a>all reservations</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+         <br>
+
+
+        <hr>
+
+<footer class="container" id="footer">
+    <p>&copy; 2020</p>
+</footer>
+
+</body>
+</html>
