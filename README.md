@@ -9,7 +9,7 @@ Password: admin:admin
 
 ## 2. Info
 
-NONE
+Comitted through Git Bash.
 
 ## 3. Technologies
 Project is created with:
