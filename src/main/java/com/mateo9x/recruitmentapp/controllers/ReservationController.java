@@ -8,10 +8,15 @@ import com.mateo9x.recruitmentapp.model.Book;
 import com.mateo9x.recruitmentapp.model.Reservation;
 import com.mateo9x.recruitmentapp.repository.BookRepository;
 import com.mateo9x.recruitmentapp.repository.ReservationRepository;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -29,28 +34,38 @@ public class ReservationController {
             this.reservationCommandToReservation = reservationCommandToReservation;
         }
 
+   /*    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+         String username= authentication.getName(); */
+
+
     @GetMapping
-    @RequestMapping(value ={"/reservations", "reservation/show"})
+    @RequestMapping(value ={ "reservation/show"})
     public String getReservations(Model model){
-            model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("reservations", reservationRepository.findAll());
         return "reservation/show";
     }
 
         @GetMapping("/book/{id}/reserve")
-        public String makeReservation(@PathVariable("id") Long id, Model model, @ModelAttribute Reservation reservation) {
-            Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-            //Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-            //reservation.setUserId("1");
-            model.addAttribute("book", book);
-            model.addAttribute("reservation", reservation);
+        public String makeReservation(@PathVariable("id") Long id, Model model, @ModelAttribute Reservation reservation, Authentication authentication) {
+            Book bookReserve = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+          //  reservation.setUserId(authentication.getName());
+            model.addAttribute("reservation", new ReservationCommand());
+
             return "reservation/reserve";
         }
 
-    @PostMapping("/reservation")
-    public String saveOrUpdate(@ModelAttribute Reservation reservation, Model model){
+    @PostMapping("reservation")
+    public String save(@ModelAttribute ReservationCommand command){
 
-            model.addAttribute("reservation", reservation);
-            return"redirect:/";
+        Optional<Reservation> reservationOptional = reservationRepository.FindAllWithQuery();
+
+        if (!reservationOptional.isPresent()) {
+            Reservation detachedReservation = reservationCommandToReservation.convert(command);
+            Reservation saveReservation = reservationRepository.save(detachedReservation);
+            return "redirect:/";
+        } else {
+            System.out.println("Sorry, there's such book in db");
+            return "redirect:/";
+        }
     }
 }

@@ -21,8 +21,8 @@ public class ReservationCommandToReservation implements Converter<ReservationCom
             }
             final Reservation reservation = new Reservation();
             reservation.setReservationId(source.getReservationId());
+            reservation.setReservedAt(source.getReservedAt());
             reservation.setUserId(source.getUserId());
-          //  reservation.setBookId(source.getBookId());
             return reservation;
         }
 

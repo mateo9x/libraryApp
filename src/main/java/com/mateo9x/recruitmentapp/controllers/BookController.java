@@ -40,7 +40,7 @@ public class BookController {
     @GetMapping("/book/new")
     public String newBook(Model model){
         model.addAttribute("book", new BookCommand());
-        model.addAttribute("reservations", reservationRepository.findAll());
+
         return "book/add";
     }
 

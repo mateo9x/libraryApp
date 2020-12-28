@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-3">
             <form  th:object="${reservation}" th:action="@{/reservation/}" method="post">
-                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{reservationId}"/>
                 <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -23,11 +23,11 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label>Reservation date:</label>
-                                    <input type="text" class="form-control" th:field="*{reservation.reservedAt}"/>
+                                    <input type="text" class="form-control" th:field="*{reservedAt}"/>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>User:</label>
-                                    <input type="text" class="form-control" th:field="*{reservation.userId}"/>
+                                    <input type="text" class="form-control" th:field="*{userId}"/>
                                 </div>
 
                             </div>

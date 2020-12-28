@@ -20,18 +20,17 @@ public class Reservation {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationId;
-    @Column(name = "reserved_at")
-    private Date reservedAt;
+    private String reservedAt;
     private String userId;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="book_id")
-    private Book book;
 
 
 
-    public Reservation(Long reservationId, String userId) {
+
+    public Reservation(Long reservationId, String reservedAt, String userId) {
         this.reservationId = reservationId;
+        this.reservedAt = reservedAt;
         this.userId = userId;
     }
 
