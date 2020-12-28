@@ -1,6 +1,7 @@
-# recruitmentapp
+# libraryApp
 ## 0. At the beginning:
-This is my recruitment task.
+
+This is my example app.
 Password: admin:admin
 
 ## 1. Table of contents
@@ -8,6 +9,8 @@ Password: admin:admin
 * [Technologies](#3-technologies)
 
 ## 2. Info
+
+This app is being built to make CRUD operations on Entity "Book" - add, edit, delete, show. And also you Can reserve book by Typing your name and date of reservation will be added automatically through clicking "Reserve" Button
 
 Comitted through Git Bash.
 
