@@ -26,6 +26,9 @@ public class Book {
     @Column(name = "releasedate")
     private String releaseDate;
 
+  /* @OneToOne(mappedBy = "book")
+    private Reservation reservation;*/
+
 
     public Book(Long id, String name, String author, String releaseDate, String comment) {
         this.id = id;

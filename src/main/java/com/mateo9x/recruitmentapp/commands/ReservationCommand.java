@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ReservationCommand {
 
-    private Long reservationId;
+    private Long id;
     private String reservedAt;
     private String userId;
 

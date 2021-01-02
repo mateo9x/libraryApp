@@ -1,8 +1,6 @@
 package com.mateo9x.recruitmentapp.converters;
 
-import com.mateo9x.recruitmentapp.commands.BookCommand;
 import com.mateo9x.recruitmentapp.commands.ReservationCommand;
-import com.mateo9x.recruitmentapp.model.Book;
 import com.mateo9x.recruitmentapp.model.Reservation;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -20,7 +18,7 @@ public class ReservationCommandToReservation implements Converter<ReservationCom
                 return null;
             }
             final Reservation reservation = new Reservation();
-            reservation.setReservationId(source.getReservationId());
+            reservation.setId(source.getId());
             reservation.setReservedAt(source.getReservedAt());
             reservation.setUserId(source.getUserId());
             return reservation;

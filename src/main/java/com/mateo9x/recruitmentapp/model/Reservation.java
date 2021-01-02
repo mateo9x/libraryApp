@@ -1,17 +1,9 @@
 package com.mateo9x.recruitmentapp.model;
 
 
-import com.mateo9x.recruitmentapp.repository.BookRepository;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Data
@@ -22,17 +14,19 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reservationId;
+    private Long id;
+    @Column(name = "reserved_at")
     private String reservedAt;
     private String userId;
 
-    @OneToOne
-    private Book book;
+ /*  @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private Book book;*/
 
 
 
-    public Reservation(Long reservationId, String reservedAt, String userId) {
-        this.reservationId = reservationId;
+    public Reservation(Long id, String reservedAt, String userId) {
+        this.id = id;
         this.reservedAt = reservedAt;
         this.userId = userId;
     }

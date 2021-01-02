@@ -20,21 +20,14 @@
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead class="thead-inverse">
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Author</th>
-                            <th>User ID</th>
-                            <th>Reservation Date</th>
+                            <th>Reserved by user:</th>
+                            <th>Reservation date:</th>
+
                             </thead>
-                            <tr th:each="book : ${books}">
-                                <td th:text="${book.id}">1</td>
-                                <td th:text="${book.name}">Wiedzmin</td>
-                                <td th:text="${book.author}">Sapek</td>
-                            </tr>
+
                           <tr th:each="reservation : ${reservations}">
                                 <td th:text="${reservation.userId}">admin</td>
                                 <td th:text="${reservation.reservedAt}">1</td>
-
                             </tr> -->
                         </table>
                     </div>
@@ -45,7 +38,8 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="col-md-1">
-                <li th:align="center"><a class="btn btn-primary btn-lg" th:href="@{'http://localhost:8080'}" >BACK TO MAIN PAGE</a></li>
+                <li th:align="center"><a class="btn btn-primary btn-lg" th:href="@{'/book/list'}" >Back to previous page</a></li>
+                <li th:align="center"><a class="btn btn-primary btn-lg" th:href="@{'http://localhost:8080'}" >Back to main page</a></li>
             </div>
 
         </div>
