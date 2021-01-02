@@ -12,8 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface ReservationRepository extends CrudRepository<Reservation, Long> {
-    //Optional<Reservation> getFirstByBookId(String bookId);
     @Query(value="SELECT * FROM RESERVATION WHERE reserved_at IS NOT NULL", nativeQuery= true)
-    Optional<Reservation> FindAllWithQuery();
+    Optional<Reservation> FindAllWithQuery(@Query);
 
 }

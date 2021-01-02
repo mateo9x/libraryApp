@@ -17,6 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Controller
@@ -34,22 +37,24 @@ public class ReservationController {
             this.reservationCommandToReservation = reservationCommandToReservation;
         }
 
-   /*    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-         String username= authentication.getName(); */
-
 
     @GetMapping
     @RequestMapping(value ={ "reservation/show"})
     public String getReservations(Model model){
         model.addAttribute("reservations", reservationRepository.findAll());
+        model.addAttribute("books", bookRepository.findAll());
         return "reservation/show";
     }
 
         @GetMapping("/book/{id}/reserve")
-        public String makeReservation(@PathVariable("id") Long id, Model model, @ModelAttribute Reservation reservation, Authentication authentication) {
-            Book bookReserve = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-          //  reservation.setUserId(authentication.getName());
-            model.addAttribute("reservation", new ReservationCommand());
+        public String makeReservation(@PathVariable("id") Long id, Model model, @ModelAttribute Reservation reservation, Authentication authentication, LocalDateTime dateTime) {
+         //   Book bookReserve = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+            reservation.setUserId(authentication.getName());
+            dateTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDateTime = dateTime.format(formatter);
+            reservation.setReservedAt(formattedDateTime);
+            model.addAttribute("reservations", new ReservationCommand());
 
             return "reservation/reserve";
         }
