@@ -10,7 +10,7 @@ Password: admin:admin
 
 ## 2. Info
 
-This app is being built to make CRUD operations on Entity "Book" - add, edit, delete, show. And also you Can reserve book by Typing your name and date of reservation will be added automatically through clicking "Reserve" Button
+This app is being built to make CRUD operations on Entity "Book" - add, edit, delete, show. Also you Can reserve book - username will be taken through method Principal (taking username logged in session) and date of reservation will be added automatically based on currently time using library LocalDateTime.
 
 Comitted through Git Bash.
 
