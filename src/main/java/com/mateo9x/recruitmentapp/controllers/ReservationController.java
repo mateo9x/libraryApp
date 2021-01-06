@@ -38,32 +38,24 @@ public class ReservationController {
         }
 
 
-    @RequestMapping("reservation/{id}/show")
-    public String getReservations(Model model, Book book){
+    @RequestMapping("reservations/show")
+    public String getReservations(Model model){
         model.addAttribute("reservations", reservationRepository.findAll());
         return "reservation/show";
     }
 
-        @GetMapping("/book/{id}/reserve")
-        public String makeReservation(@PathVariable("id") Long id, Model model,Book book, @ModelAttribute Reservation reservation, Authentication authentication, LocalDateTime dateTime) {
-        //    Book bookReserve = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
-                reservation.setUserId(authentication.getName());
-                dateTime = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formattedDateTime = dateTime.format(formatter);
-                reservation.setReservedAt(formattedDateTime);
-            model.addAttribute("books", bookRepository.findById(id).get());
-                model.addAttribute("reservations", new ReservationCommand());
-                return "reservation/reserve";
-
-        }
-
+    @GetMapping("book/{id}/reserve")
     @PostMapping("reservation")
-    public String save(@ModelAttribute ReservationCommand command){
+    public String save(@ModelAttribute ReservationCommand command, Authentication authentication, LocalDateTime dateTime){
 
         Optional<Reservation> reservationOptional = reservationRepository.findAllByUserId(command.getUserId());
 
         if (!reservationOptional.isPresent()) {
+            command.setUserId(authentication.getName());
+            dateTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String formattedDateTime = dateTime.format(formatter);
+            command.setReservedAt(formattedDateTime);
             Reservation detachedReservation = reservationCommandToReservation.convert(command);
             Reservation saveReservation = reservationRepository.save(detachedReservation);
             return "redirect:/";
